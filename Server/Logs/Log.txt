@@ -1,0 +1,171 @@
+2018-01-19 17:53:41.0747   (Program.cs:22) System.IO.FileNotFoundException: Could not find file 'C:\Users\taikr_1_003\Desktop\ET-master\Bin\Hotfix.dll'.
+File name: 'C:\Users\taikr_1_003\Desktop\ET-master\Bin\Hotfix.dll'
+   at System.IO.FileStream.OpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at System.IO.File.InternalReadAllBytes(String path)
+   at System.IO.File.ReadAllBytes(String path)
+   at Model.DllHelper.GetHotfixAssembly() in C:\Users\taikr_1_003\Desktop\ET-master\Server\Model\Base\Helper\DllHelper.cs:line 12
+   at App.Program.Main(String[] args) in C:\Users\taikr_1_003\Desktop\ET-master\Server\App\Program.cs:line 22
+2018-01-19 17:53:52.9779   (Program.cs:22) System.IO.FileNotFoundException: Could not find file 'C:\Users\taikr_1_003\Desktop\ET-master\Bin\Hotfix.dll'.
+File name: 'C:\Users\taikr_1_003\Desktop\ET-master\Bin\Hotfix.dll'
+   at System.IO.FileStream.OpenHandle(FileMode mode, FileShare share, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+   at System.IO.File.InternalReadAllBytes(String path)
+   at System.IO.File.ReadAllBytes(String path)
+   at Model.DllHelper.GetHotfixAssembly() in C:\Users\taikr_1_003\Desktop\ET-master\Server\Model\Base\Helper\DllHelper.cs:line 12
+   at App.Program.Main(String[] args) in C:\Users\taikr_1_003\Desktop\ET-master\Server\App\Program.cs:line 22
+2018-01-19 17:54:05.5847 AllServer 001 (Program.cs:40) server start........................
+2018-01-19 17:54:05.8027 AllServer 001 (ActorMessageDispatherComponent.cs:36) apptype: AllServer
+2018-01-19 17:55:32.6634 AllServer 001 (Program.cs:40) server start........................
+2018-01-19 17:55:32.9032 AllServer 001 (ActorMessageDispatherComponent.cs:36) apptype: AllServer
+2018-01-19 18:12:19.4584 AllServer 001 (Program.cs:40) server start........................
+2018-01-19 18:12:20.6592 AllServer 001 (ActorMessageDispatherComponent.cs:36) apptype: AllServer
+2018-01-19 18:22:33.3091 AllServer 001 (Program.cs:40) server start........................
+2018-01-19 18:22:33.5432 AllServer 001 (ActorMessageDispatherComponent.cs:36) apptype: AllServer
+2018-01-22 11:36:05.5195 AllServer 001 (Program.cs:40) server start........................
+2018-01-22 11:36:06.2648 AllServer 001 (ActorMessageDispatherComponent.cs:36) apptype: AllServer
+2018-01-22 11:36:19.5293 AllServer 001 (C2R_LoginHandler.cs:13) { "RpcId" : 1, "Account" : "awdwad", "Password" : "111111" }
+2018-01-22 11:36:19.7829 AllServer 001 (LocationComponent.cs:104) location add key: 380866361753971 appid: 1
+2018-01-22 11:36:21.0282 AllServer 001 (C2G_EnterMapHandler.cs:15) { "_t" : "C2G_EnterMap", "RpcId" : 3 }
+2018-01-22 11:36:21.0734 AllServer 001 (LocationComponent.cs:104) location add key: 380866361885079 appid: 1
+2018-01-22 11:36:21.1360 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:36:23.2362 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:36:23.2464 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:36:23.7470 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:37:26.2777 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:37:26.2777 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:37:26.2928 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:37:26.7929 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:38:36.3088 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:38:36.3088 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:38:36.3224 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:38:36.8226 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:39:46.2856 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:39:46.2938 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:39:46.2938 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:39:46.7997 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:40:56.3157 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:40:56.3237 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:40:56.3237 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:40:56.8288 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:42:06.3150 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:42:06.3212 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:42:06.3212 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:42:06.8268 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:43:16.3089 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:43:16.3089 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:43:16.3211 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:43:16.8205 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:44:26.3232 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 11:44:26.3232 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:44:26.3389 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 380866361753971
+2018-01-22 11:44:26.8384 AllServer 001 (LocationComponent.cs:211) location get key: 380866361753971 1
+2018-01-22 14:24:12.7166 AllServer 001 (Program.cs:40) server start........................
+2018-01-22 14:24:12.9595 AllServer 001 (ActorMessageDispatherComponent.cs:36) apptype: AllServer
+2018-01-22 15:26:15.9641 AllServer 001 (Program.cs:40) server start........................
+2018-01-22 15:26:16.2106 AllServer 001 (ActorMessageDispatherComponent.cs:36) apptype: AllServer
+2018-01-22 15:28:07.3418 AllServer 001 (Program.cs:40) server start........................
+2018-01-22 15:28:07.5699 AllServer 001 (ActorMessageDispatherComponent.cs:36) apptype: AllServer
+2018-06-10 16:36:43.0954 AllServer 001 (Program.cs:40) server start........................
+2018-06-10 16:36:43.4508 AllServer 001 (ActorMessageDispatherComponent.cs:36) apptype: AllServer
+2018-06-10 16:38:41.0352 AllServer 001 (C2R_LoginHandler.cs:13) { "RpcId" : 1, "Account" : "123", "Password" : "111111" }
+2018-06-10 16:38:41.6021 AllServer 001 (LocationComponent.cs:104) location add key: 381654611856221 appid: 1
+2018-06-10 16:38:42.8863 AllServer 001 (C2G_EnterMapHandler.cs:15) { "_t" : "C2G_EnterMap", "RpcId" : 3 }
+2018-06-10 16:38:42.9810 AllServer 001 (LocationComponent.cs:104) location add key: 381654611921785 appid: 1
+2018-06-10 16:38:43.0972 AllServer 001 (LocationComponent.cs:211) location get key: 381654611856221 1
+2018-06-10 16:39:14.3067 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654611856221
+2018-06-10 16:39:14.3067 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654611856221
+2018-06-10 16:39:14.8094 AllServer 001 (LocationComponent.cs:211) location get key: 381654611856221 1
+2018-06-10 16:40:23.4980 AllServer 001 (LocationComponent.cs:211) location get key: 381654611856221 1
+2018-06-10 16:40:23.4980 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654611856221
+2018-06-10 16:40:23.4980 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654611856221
+2018-06-10 16:40:24.0021 AllServer 001 (LocationComponent.cs:211) location get key: 381654611856221 1
+2018-06-10 16:41:33.4831 AllServer 001 (LocationComponent.cs:211) location get key: 381654611856221 1
+2018-06-10 16:41:33.4831 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654611856221
+2018-06-10 16:41:33.4831 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654611856221
+2018-06-10 16:41:33.9868 AllServer 001 (LocationComponent.cs:211) location get key: 381654611856221 1
+2018-06-10 16:42:43.5070 AllServer 001 (LocationComponent.cs:211) location get key: 381654611856221 1
+2018-06-10 16:42:43.5070 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654611856221
+2018-06-10 16:42:43.5070 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654611856221
+2018-06-10 16:42:44.0102 AllServer 001 (LocationComponent.cs:211) location get key: 381654611856221 1
+2018-06-10 16:42:49.1736 AllServer 001 (C2R_LoginHandler.cs:13) { "RpcId" : 1, "Account" : "12344", "Password" : "111111" }
+2018-06-10 16:42:49.2213 AllServer 001 (LocationComponent.cs:104) location add key: 381654628115212 appid: 1
+2018-06-10 16:42:50.5211 AllServer 001 (C2G_EnterMapHandler.cs:15) { "_t" : "C2G_EnterMap", "RpcId" : 3 }
+2018-06-10 16:42:50.5211 AllServer 001 (LocationComponent.cs:104) location add key: 381654628180786 appid: 1
+2018-06-10 16:42:50.5381 AllServer 001 (G2M_CreateUnitHandler.cs:31) { "_t" : "Actor_CreateUnits", "Units" : [{ "UnitId" : NumberLong("381654611921785"), "X" : 0, "Z" : 0 }, { "UnitId" : NumberLong("381654628180786"), "X" : 0, "Z" : 0 }] }
+2018-06-10 16:42:50.5381 AllServer 001 (LocationComponent.cs:211) location get key: 381654628115212 1
+2018-06-10 16:42:51.6188 AllServer 001 (LocationComponent.cs:211) location get key: 381654628180786 1
+2018-06-10 16:43:07.7929 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654628115212
+2018-06-10 16:43:07.7929 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654628115212
+2018-06-10 16:43:08.2938 AllServer 001 (LocationComponent.cs:211) location get key: 381654628115212 1
+2018-06-10 16:44:26.5809 AllServer 001 (Program.cs:40) server start........................
+2018-06-10 16:44:26.8293 AllServer 001 (ActorMessageDispatherComponent.cs:36) apptype: AllServer
+2018-06-10 16:45:07.9788 AllServer 001 (C2R_LoginHandler.cs:13) { "RpcId" : 1, "Account" : "123", "Password" : "111111" }
+2018-06-10 16:45:08.1872 AllServer 001 (LocationComponent.cs:104) location add key: 381654637216806 appid: 1
+2018-06-10 16:45:19.7298 AllServer 001 (C2G_EnterMapHandler.cs:15) { "_t" : "C2G_EnterMap", "RpcId" : 3 }
+2018-06-10 16:45:19.7298 AllServer 001 (LocationComponent.cs:104) location add key: 381654637937994 appid: 1
+2018-06-10 16:45:19.7822 AllServer 001 (LocationComponent.cs:211) location get key: 381654637216806 1
+2018-06-10 16:45:43.8837 AllServer 001 (C2R_LoginHandler.cs:13) { "RpcId" : 1, "Account" : "2", "Password" : "111111" }
+2018-06-10 16:45:43.9574 AllServer 001 (LocationComponent.cs:104) location add key: 381654639511438 appid: 1
+2018-06-10 16:45:45.8069 AllServer 001 (C2G_EnterMapHandler.cs:15) { "_t" : "C2G_EnterMap", "RpcId" : 3 }
+2018-06-10 16:45:45.8069 AllServer 001 (LocationComponent.cs:104) location add key: 381654639642561 appid: 1
+2018-06-10 16:45:45.8457 AllServer 001 (G2M_CreateUnitHandler.cs:31) { "_t" : "Actor_CreateUnits", "Units" : [{ "UnitId" : NumberLong("381654637937994"), "X" : 0, "Z" : 0 }, { "UnitId" : NumberLong("381654639642561"), "X" : 0, "Z" : 0 }] }
+2018-06-10 16:45:45.8825 AllServer 001 (LocationComponent.cs:211) location get key: 381654639511438 1
+2018-06-10 16:45:46.9174 AllServer 001 (LocationComponent.cs:211) location get key: 381654639642561 1
+2018-06-10 16:45:50.5987 AllServer 001 (LocationComponent.cs:211) location get key: 381654637937994 1
+2018-06-10 16:46:19.1421 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654639511438
+2018-06-10 16:46:19.1557 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654639511438
+2018-06-10 16:46:19.6554 AllServer 001 (LocationComponent.cs:211) location get key: 381654639511438 1
+2018-06-10 16:46:21.1494 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654637216806
+2018-06-10 16:46:21.1505 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654637216806
+2018-06-10 16:46:21.6511 AllServer 001 (LocationComponent.cs:211) location get key: 381654637216806 1
+2018-06-10 16:50:40.1791 AllServer 001 (Program.cs:40) server start........................
+2018-06-10 16:50:40.5309 AllServer 001 (ActorMessageDispatherComponent.cs:36) apptype: AllServer
+2018-06-10 16:50:54.2863 AllServer 001 (C2R_LoginHandler.cs:13) { "RpcId" : 1, "Account" : "1", "Password" : "111111" }
+2018-06-10 16:50:54.7162 AllServer 001 (LocationComponent.cs:104) location add key: 381654659891562 appid: 1
+2018-06-10 16:50:55.7243 AllServer 001 (C2R_LoginHandler.cs:13) { "RpcId" : 1, "Account" : "1", "Password" : "111111" }
+2018-06-10 16:50:55.7655 AllServer 001 (LocationComponent.cs:104) location add key: 381654659957134 appid: 1
+2018-06-10 16:50:57.0937 AllServer 001 (C2G_EnterMapHandler.cs:15) { "_t" : "C2G_EnterMap", "RpcId" : 3 }
+2018-06-10 16:50:57.1169 AllServer 001 (LocationComponent.cs:104) location add key: 381654660088245 appid: 1
+2018-06-10 16:50:57.1562 AllServer 001 (LocationComponent.cs:211) location get key: 381654659891562 1
+2018-06-10 16:50:58.0752 AllServer 001 (C2G_EnterMapHandler.cs:15) { "_t" : "C2G_EnterMap", "RpcId" : 3 }
+2018-06-10 16:50:58.2766 AllServer 001 (LocationComponent.cs:104) location add key: 381654660153795 appid: 1
+2018-06-10 16:50:58.3448 AllServer 001 (G2M_CreateUnitHandler.cs:31) { "_t" : "Actor_CreateUnits", "Units" : [{ "UnitId" : NumberLong("381654660088245"), "X" : 0, "Z" : 0 }, { "UnitId" : NumberLong("381654660153795"), "X" : 0, "Z" : 0 }] }
+2018-06-10 16:50:58.3835 AllServer 001 (LocationComponent.cs:211) location get key: 381654659957134 1
+2018-06-10 16:51:00.3526 AllServer 001 (LocationComponent.cs:211) location get key: 381654660088245 1
+2018-06-10 16:51:01.9608 AllServer 001 (LocationComponent.cs:211) location get key: 381654660153795 1
+2018-06-10 16:51:06.2400 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659957134
+2018-06-10 16:51:06.2448 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659957134
+2018-06-10 16:51:06.7426 AllServer 001 (LocationComponent.cs:211) location get key: 381654659957134 1
+2018-06-10 16:51:07.4291 AllServer 001 (TChannel.cs:159) System.InvalidOperationException: The operation is not allowed on non-connected sockets.
+   at System.Net.Sockets.TcpClient.GetStream()
+   at Model.TChannel.StartSend() in F:\GithubProjects\Boom\Server\Server\Model\Base\Network\TNet\TChannel.cs:line 159
+2018-06-10 16:51:07.4730 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659891562
+2018-06-10 16:51:07.4730 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659891562
+2018-06-10 16:51:07.9741 AllServer 001 (LocationComponent.cs:211) location get key: 381654659891562 1
+2018-06-10 16:52:10.5628 AllServer 001 (LocationComponent.cs:211) location get key: 381654659891562 1
+2018-06-10 16:52:10.5628 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659891562
+2018-06-10 16:52:10.5628 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659891562
+2018-06-10 16:52:10.5628 AllServer 001 (LocationComponent.cs:211) location get key: 381654659957134 1
+2018-06-10 16:52:10.5628 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659957134
+2018-06-10 16:52:10.5628 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659957134
+2018-06-10 16:52:11.0662 AllServer 001 (LocationComponent.cs:211) location get key: 381654659891562 1
+2018-06-10 16:52:11.0662 AllServer 001 (LocationComponent.cs:211) location get key: 381654659957134 1
+2018-06-10 16:53:20.5554 AllServer 001 (LocationComponent.cs:211) location get key: 381654659891562 1
+2018-06-10 16:53:20.5569 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659891562
+2018-06-10 16:53:20.5569 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659891562
+2018-06-10 16:53:20.5569 AllServer 001 (LocationComponent.cs:211) location get key: 381654659957134 1
+2018-06-10 16:53:20.5569 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659957134
+2018-06-10 16:53:20.5569 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659957134
+2018-06-10 16:53:21.0584 AllServer 001 (LocationComponent.cs:211) location get key: 381654659891562 1
+2018-06-10 16:53:21.0584 AllServer 001 (LocationComponent.cs:211) location get key: 381654659957134 1
+2018-06-10 16:54:30.5921 AllServer 001 (LocationComponent.cs:211) location get key: 381654659891562 1
+2018-06-10 16:54:30.5921 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659891562
+2018-06-10 16:54:30.5921 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659891562
+2018-06-10 16:54:30.5921 AllServer 001 (LocationComponent.cs:211) location get key: 381654659957134 1
+2018-06-10 16:54:30.5921 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659957134
+2018-06-10 16:54:30.5921 AllServer 001 (InnerMessageDispatcher.cs:35) not found actor: 381654659957134
+2018-06-10 16:54:31.0955 AllServer 001 (LocationComponent.cs:211) location get key: 381654659891562 1
+2018-06-10 16:54:31.0955 AllServer 001 (LocationComponent.cs:211) location get key: 381654659957134 1
