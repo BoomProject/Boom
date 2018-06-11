@@ -1,26 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
-	[ObjectEvent]
-	public class ActorComponentSystem : ObjectSystem<ActorComponent>, IAwake, IAwake<IEntityActorHandler>, ILoad
+	[ObjectSystem]
+	public class ActorComponentAwakeSystem : AwakeSystem<ActorComponent>
 	{
-		public void Awake()
+		public override void Awake(ActorComponent self)
 		{
-			this.Get().Awake();
+			self.Awake();
 		}
+	}
 
-		public void Awake(IEntityActorHandler iEntityActorHandler)
+	[ObjectSystem]
+	public class ActorComponentAwake1System : AwakeSystem<ActorComponent, IEntityActorHandler>
+	{
+		public override void Awake(ActorComponent self, IEntityActorHandler iEntityActorHandler)
 		{
-			this.Get().Awake(iEntityActorHandler);
+			self.Awake(iEntityActorHandler);
 		}
+	}
 
-		public void Load()
+	[ObjectSystem]
+	public class ActorComponentLoadSystem : LoadSystem<ActorComponent>
+	{
+		public override void Load(ActorComponent self)
 		{
-			this.Get().Load();
+			self.Load();
 		}
 	}
 
@@ -33,8 +41,8 @@ namespace Hotfix
 		{
 			self.entityActorHandler = new CommonEntityActorHandler();
 			self.queue = new Queue<ActorMessageInfo>();
-			self.actorId = self.Parent.Id;
-			Game.Scene.GetComponent<ActorManagerComponent>().Add(self.Parent);
+			self.actorId = self.Entity.Id;
+			Game.Scene.GetComponent<ActorManagerComponent>().Add((Entity)self.Parent);
 			self.HandleAsync();
 		}
 
@@ -42,8 +50,8 @@ namespace Hotfix
 		{
 			self.entityActorHandler = iEntityActorHandler;
 			self.queue = new Queue<ActorMessageInfo>();
-			self.actorId = self.Parent.Id;
-			Game.Scene.GetComponent<ActorManagerComponent>().Add(self.Parent);
+			self.actorId = self.Entity.Id;
+			Game.Scene.GetComponent<ActorManagerComponent>().Add((Entity)self.Parent);
 			self.HandleAsync();
 		}
 
@@ -92,7 +100,7 @@ namespace Hotfix
 		{
 			while (true)
 			{
-				if (self.Id == 0)
+				if (self.IsDisposed)
 				{
 					return;
 				}
@@ -100,11 +108,11 @@ namespace Hotfix
 				{
 					ActorMessageInfo info = await self.GetAsync();
 					// 返回null表示actor已经删除,协程要终止
-					if (info == null)
+					if (info.Message == null)
 					{
 						return;
 					}
-					await self.entityActorHandler.Handle(info.Session, self.Parent, info.Message);
+					await self.entityActorHandler.Handle(info.Session, (Entity)self.Parent, info.Message);
 				}
 				catch (Exception e)
 				{

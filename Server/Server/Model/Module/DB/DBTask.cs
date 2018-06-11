@@ -1,17 +1,9 @@
 ﻿using System.Threading.Tasks;
 
-namespace Model
+namespace ETModel
 {
-	public abstract class DBTask : Disposer
+	public abstract class DBTask : Component
 	{
-		protected DBTask()
-		{
-		}
-
-		protected DBTask(long id): base(id)
-		{
-		}
-		
 		public abstract Task Run();
 	}
 }

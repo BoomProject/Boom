@@ -1,7 +1,7 @@
 ﻿using System;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	[MessageHandler(AppType.DB)]
 	public class DBQueryRequestHandler : AMRpcHandler<DBQueryRequest, DBQueryResponse>
@@ -12,7 +12,7 @@ namespace Hotfix
 			try
 			{
 				DBCacheComponent dbCacheComponent = Game.Scene.GetComponent<DBCacheComponent>();
-				Disposer disposer = await dbCacheComponent.Get(message.CollectionName, message.Id);
+				Component disposer = await dbCacheComponent.Get(message.CollectionName, message.Id);
 
 				response.Disposer = disposer;
 

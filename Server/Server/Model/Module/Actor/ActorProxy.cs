@@ -3,94 +3,31 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using MongoDB.Bson.Serialization.Attributes;
 
-namespace Model
+namespace ETModel
 {
-	public abstract class ActorTask
+	[ObjectSystem]
+	public class ActorProxyAwakeSystem : AwakeSystem<ActorProxy>
 	{
-		[BsonIgnore]
-		public ActorProxy proxy;
-
-		[BsonElement]
-		public AMessage message;
-
-		public abstract Task<AResponse> Run();
-
-		public abstract void RunFail(int error);
-	}
-
-	/// <summary>
-	/// 普通消息，不需要response
-	/// </summary>
-	public class ActorMessageTask: ActorTask
-	{
-		public ActorMessageTask(ActorProxy proxy, AMessage message)
+		public override void Awake(ActorProxy self)
 		{
-			this.proxy = proxy;
-			this.message = message;
-		}
-
-		public override async Task<AResponse> Run()
-		{
-			ActorRequest request = new ActorRequest() { Id = this.proxy.Id, AMessage = this.message };
-			ActorResponse response = await this.proxy.RealCall<ActorResponse>(request, this.proxy.CancellationTokenSource.Token);
-			return response;
-		}
-
-		public override void RunFail(int error)
-		{
+			self.Awake();
 		}
 	}
 
-	/// <summary>
-	/// Rpc消息，需要等待返回
-	/// </summary>
-	/// <typeparam name="Response"></typeparam>
-	public class ActorRpcTask<Response> : ActorTask where Response: AResponse
+	[ObjectSystem]
+	public class ActorProxyStartSystem : StartSystem<ActorProxy>
 	{
-		[BsonIgnore]
-		public readonly TaskCompletionSource<Response> Tcs = new TaskCompletionSource<Response>();
-
-		public ActorRpcTask(ActorProxy proxy, ARequest message)
+		public override async void Start(ActorProxy self)
 		{
-			this.proxy = proxy;
-			this.message = message;
-		}
+			int appId = await Game.Scene.GetComponent<LocationProxyComponent>().Get(self.Id);
+			self.Address = Game.Scene.GetComponent<StartConfigComponent>().Get(appId).GetComponent<InnerConfig>().IPEndPoint;
 
-		public override async Task<AResponse> Run()
-		{
-			ActorRpcRequest request = new ActorRpcRequest() { Id = this.proxy.Id, AMessage = this.message };
-			ActorRpcResponse response = await this.proxy.RealCall<ActorRpcResponse>(request, this.proxy.CancellationTokenSource.Token);
-			if (response.Error != ErrorCode.ERR_NotFoundActor)
-			{
-				this.Tcs.SetResult((Response)response.AMessage);
-			}
-			return response;
-		}
-
-		public override void RunFail(int error)
-		{
-			this.Tcs.SetException(new RpcException(error, ""));
+			self.UpdateAsync();
 		}
 	}
 
-
-	[ObjectEvent]
-	public class ActorProxySystem : ObjectSystem<ActorProxy>, IAwake, IStart
-	{
-		public void Awake()
-		{
-			this.Get().Awake();
-		}
-
-		public void Start()
-		{
-			this.Get().Start();
-		}
-	}
-
-	public sealed class ActorProxy : Disposer
+	public sealed class ActorProxy : Component
 	{
 		// actor的地址
 		public IPEndPoint Address;
@@ -119,8 +56,6 @@ namespace Model
 		public void Awake()
 		{
 			this.LastSendTime = TimeHelper.Now();
-			this.RunningTasks.Clear();
-			this.WaitingTasks.Clear();
 			this.WindowSize = 1;
 			this.tcs = null;
 			this.CancellationTokenSource = new CancellationTokenSource();
@@ -128,7 +63,7 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}
@@ -141,20 +76,12 @@ namespace Model
 			this.failTimes = 0;
 			var t = this.tcs;
 			this.tcs = null;
-			t?.SetResult(null);
+			t?.SetResult(new ActorTask());
 		}
-
-		public async void Start()
-		{
-			int appId = await Game.Scene.GetComponent<LocationProxyComponent>().Get(this.Id);
-			this.Address = Game.Scene.GetComponent<StartConfigComponent>().Get(appId).GetComponent<InnerConfig>().IPEndPoint;
-
-			this.UpdateAsync();
-		}
-
+		
 		private void Add(ActorTask task)
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				throw new Exception("ActorProxy Disposed! dont hold actorproxy");
 			}
@@ -165,13 +92,7 @@ namespace Model
 				this.AllowGet();
 			}
 		}
-
-		private void Remove()
-		{
-			this.RunningTasks.Dequeue();
-			this.AllowGet();
-		}
-
+		
 		private void AllowGet()
 		{
 			if (this.tcs == null || this.WaitingTasks.Count <= 0 || this.RunningTasks.Count >= this.WindowSize)
@@ -200,16 +121,12 @@ namespace Model
 			return this.tcs.Task;
 		}
 
-		private async void UpdateAsync()
+		public async void UpdateAsync()
 		{
 			while (true)
 			{
 				ActorTask actorTask = await this.GetAsync();
-				if (this.Id == 0)
-				{
-					return;
-				}
-				if (actorTask == null)
+				if (this.IsDisposed)
 				{
 					return;
 				}
@@ -229,7 +146,7 @@ namespace Model
 		{
 			try
 			{
-				AResponse response = await task.Run();
+				IResponse response = await task.Run();
 
 				// 如果没找到Actor,发送窗口减少为1,重试
 				if (response.Error == ErrorCode.ERR_NotFoundActor)
@@ -274,7 +191,9 @@ namespace Model
 				{
 					++this.WindowSize;
 				}
-				this.Remove();
+
+				this.RunningTasks.Dequeue();
+				this.AllowGet();
 			}
 			catch (Exception e)
 			{
@@ -282,34 +201,26 @@ namespace Model
 			}
 		}
 
-		public void Send(AMessage message)
+		public void Send(IActorMessage message)
 		{
-			ActorMessageTask task = new ActorMessageTask(this, message);
+			ActorTask task = new ActorTask
+			{
+				message = message,
+				proxy = this
+			};
 			this.Add(task);
 		}
 
-		public Task<Response> Call<Response>(ARequest request)where Response : AResponse
+		public Task<IResponse> Call(IActorRequest request)
 		{
-			ActorRpcTask<Response> task = new ActorRpcTask<Response>(this, request);
+			ActorTask task = new ActorTask
+			{
+				message = request,
+				proxy = this,
+				Tcs = new TaskCompletionSource<IResponse>()
+			};
 			this.Add(task);
 			return task.Tcs.Task;
-		}
-
-		public async Task<Response> RealCall<Response>(ActorRequest request, CancellationToken cancellationToken) where Response: AResponse
-		{
-			try
-			{
-				//Log.Debug($"realcall {MongoHelper.ToJson(request)} {this.Address}");
-				request.Id = this.Id;
-				Session session = Game.Scene.GetComponent<NetInnerComponent>().Get(this.Address);
-				Response response = await session.Call<Response>(request, cancellationToken);
-				return response;
-			}
-			catch (RpcException e)
-			{
-				Log.Error($"{this.Address} {e}");
-				throw;
-			}
 		}
 
 		public string DebugQueue(Queue<ActorTask> tasks)

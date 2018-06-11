@@ -4,16 +4,14 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Model
+namespace ETModel
 {
-	[ObjectEvent]
-	public class DbSaveBatchTaskSystem : ObjectSystem<DBSaveBatchTask>, IAwake<List<Entity>, string, TaskCompletionSource<bool>>
+	[ObjectSystem]
+	public class DbSaveBatchTaskSystem : AwakeSystem<DBSaveBatchTask, List<Component>, string, TaskCompletionSource<bool>>
 	{
-		public void Awake(List<Entity> entitys, string collectionName, TaskCompletionSource<bool> tcs)
+		public override void Awake(DBSaveBatchTask self, List<Component> disposers, string collectionName, TaskCompletionSource<bool> tcs)
 		{
-			DBSaveBatchTask self = this.Get();
-			
-			self.Entitys = entitys;
+			self.Disposers = disposers;
 			self.CollectionName = collectionName;
 			self.Tcs = tcs;
 		}
@@ -23,7 +21,7 @@ namespace Model
 	{
 		public string CollectionName { get; set; }
 
-		public List<Entity> Entitys;
+		public List<Component> Disposers;
 
 		public TaskCompletionSource<bool> Tcs;
 	
@@ -31,9 +29,9 @@ namespace Model
 		{
 			DBComponent dbComponent = Game.Scene.GetComponent<DBComponent>();
 
-			foreach (Entity entity in this.Entitys)
+			foreach (Component disposer in this.Disposers)
 			{
-				if (entity == null)
+				if (disposer == null)
 				{
 					continue;
 				}
@@ -41,12 +39,12 @@ namespace Model
 				try
 				{
 					// 执行保存数据库任务
-					await dbComponent.GetCollection(this.CollectionName).ReplaceOneAsync(s => s.Id == entity.Id, entity, new UpdateOptions { IsUpsert = true });
+					await dbComponent.GetCollection(this.CollectionName).ReplaceOneAsync(s => s.Id == disposer.Id, disposer, new UpdateOptions { IsUpsert = true });
 				}
 				catch (Exception e)
 				{
-					Log.Debug($"{entity.GetType().Name} {entity.ToJson()}" + e.ToString());
-					this.Tcs.SetException(new Exception($"保存数据失败! {CollectionName} {this.Entitys.ListToString()}", e));
+					Log.Debug($"{disposer.GetType().Name} {disposer.ToJson()} {e}");
+					this.Tcs.SetException(new Exception($"保存数据失败! {CollectionName} {this.Disposers.ListToString()}", e));
 				}
 			}
 			this.Tcs.SetResult(true);

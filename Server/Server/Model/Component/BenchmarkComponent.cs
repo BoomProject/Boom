@@ -2,14 +2,14 @@
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Model
+namespace ETModel
 {
-	[ObjectEvent]
-	public class BenchmarkComponentSystem : ObjectSystem<BenchmarkComponent>, IAwake<IPEndPoint>
+	[ObjectSystem]
+	public class BenchmarkComponentSystem : AwakeSystem<BenchmarkComponent, IPEndPoint>
 	{
-		public void Awake(IPEndPoint ipEndPoint)
+		public override void Awake(BenchmarkComponent self, IPEndPoint a)
 		{
-			this.Get().Awake(ipEndPoint);
+			self.Awake(a);
 		}
 	}
 
@@ -63,7 +63,7 @@ namespace Model
 		{
 			try
 			{
-				await session.Call<R2C_Ping>(new C2R_Ping());
+				await session.Call(new C2R_Ping());
 				++this.k;
 
 				if (this.k % 100000 != 0)
@@ -84,7 +84,7 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

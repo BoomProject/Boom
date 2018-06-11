@@ -2,14 +2,13 @@
 using System.Threading.Tasks;
 using MongoDB.Driver;
 
-namespace Model
+namespace ETModel
 {
-	[ObjectEvent]
-	public class DbQueryTaskSystem : ObjectSystem<DBQueryTask>, IAwake<string, TaskCompletionSource<Disposer>>
+	[ObjectSystem]
+	public class DBQueryTaskSystem : AwakeSystem<DBQueryTask, string, TaskCompletionSource<Component>>
 	{
-		public void Awake(string collectionName, TaskCompletionSource<Disposer> tcs)
+		public override void Awake(DBQueryTask self, string collectionName, TaskCompletionSource<Component> tcs)
 		{
-			DBQueryTask self = this.Get();
 			self.CollectionName = collectionName;
 			self.Tcs = tcs;
 		}
@@ -19,14 +18,14 @@ namespace Model
 	{
 		public string CollectionName { get; set; }
 
-		public TaskCompletionSource<Disposer> Tcs { get; set; }
+		public TaskCompletionSource<Component> Tcs { get; set; }
 
 		public override async Task Run()
 		{
 			DBCacheComponent dbCacheComponent = Game.Scene.GetComponent<DBCacheComponent>();
 			DBComponent dbComponent = Game.Scene.GetComponent<DBComponent>();
 			// 执行查询前先看看cache中是否已经存在
-			Disposer disposer = dbCacheComponent.GetFromCache(this.CollectionName, this.Id);
+			Component disposer = dbCacheComponent.GetFromCache(this.CollectionName, this.Id);
 			if (disposer != null)
 			{
 				this.Tcs.SetResult(disposer);

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	[MessageHandler(AppType.DB)]
 	public class DBQueryBatchRequestHandler : AMRpcHandler<DBQueryBatchRequest, DBQueryBatchResponse>
@@ -13,13 +13,13 @@ namespace Hotfix
 			try
 			{
 				DBCacheComponent dbCacheComponent = Game.Scene.GetComponent<DBCacheComponent>();
-				List<Disposer> disposers = await dbCacheComponent.GetBatch(message.CollectionName, message.IdList);
+				List<Component> disposers = await dbCacheComponent.GetBatch(message.CollectionName, message.IdList);
 
 				response.Disposers = disposers;
 
 				if (message.NeedCache)
 				{
-					foreach (Disposer disposer in disposers)
+					foreach (Component disposer in disposers)
 					{
 						dbCacheComponent.AddToCache(disposer, message.CollectionName);
 					}

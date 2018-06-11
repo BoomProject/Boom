@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 
-namespace Model
+namespace ETModel
 {
-	[ObjectEvent]
-	public class ActorManagerComponentSystem : ObjectSystem<ActorManagerComponent>, IAwake
+	[ObjectSystem]
+	public class ActorManagerComponentAwakeSystem : AwakeSystem<ActorManagerComponent>
 	{
-		public void Awake()
+		public override void Awake(ActorManagerComponent self)
 		{
-			this.Get().Awake();
+			self.Awake();
 		}
 	}
 
@@ -24,11 +24,18 @@ namespace Model
 
 		public void Add(Entity entity)
 		{
+			Log.Info($"add actor: {entity.Id} {entity.GetType().Name}");
 			dictionary[entity.Id] = entity;
 		}
 
 		public void Remove(long id)
 		{
+			Entity entity;
+			if (!this.dictionary.TryGetValue(id, out entity))
+			{
+				return;
+			}
+			Log.Info($"remove actor: {entity.Id} {entity.GetType().Name}");
 			this.dictionary.Remove(id);
 		}
 
@@ -41,7 +48,7 @@ namespace Model
 
 		public override void Dispose()
 		{
-			if (this.Id == 0)
+			if (this.IsDisposed)
 			{
 				return;
 			}

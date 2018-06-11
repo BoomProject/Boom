@@ -1,7 +1,7 @@
 ﻿using System;
-using Model;
+using ETModel;
 
-namespace Hotfix
+namespace ETHotfix
 {
 	[MessageHandler(AppType.DB)]
 	public class DBSaveBatchRequestHandler : AMRpcHandler<DBSaveBatchRequest, DBSaveBatchResponse>
@@ -20,7 +20,7 @@ namespace Hotfix
 
 				if (message.NeedCache)
 				{
-					foreach (Disposer disposer in message.Disposers)
+					foreach (Component disposer in message.Disposers)
 					{
 						dbCacheComponent.AddToCache(disposer, message.CollectionName);
 					}
